@@ -1,0 +1,668 @@
+
+  <!doctype html>
+  <html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bordados & Delivery</title>
+  <meta name="description" content="Bordados & Delivery: encomendas, personalização, agendamento, pagamentos (M-PESA, e-Mola), integração WhatsApp e dropshipping para lojistas.">
+
+  <!-- ======= Styles (internal para arquivo único) ======= -->
+  <style>
+    /* Card moderno - Por que escolher a gente */
+    .card.escolha {
+      background: #0f6cf7ff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px #00336611;
+      padding: 28px 22px 22px 22px;
+      margin-top: 24px;
+      text-align: left;
+      border: 1px solid #1071e8ff;
+    }
+    .card.escolha h3 {
+      color: #0b7dda;
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+    }
+    .card.escolha p {
+      color: #222;
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+    /* Efeito imagem flutuante nos cards dos mais pedidos */
+    .mais-vendidos .produto {
+      position: relative;
+      background: #fff;
+      border: 1px solid #003366;
+      border-radius: 8px;
+      padding-top: 80px;
+      padding-bottom: 20px;
+      text-align: center;
+      overflow: visible;
+      box-shadow: 0 2px 12px #00336611;
+      margin-bottom: 18px;
+    }
+    .mais-vendidos .produto img {
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: auto;
+      z-index: 2;
+      border-radius: 10px;
+      box-shadow: 0 4px 18px #00336622;
+      background: #f9f9f9;
+      transition: transform 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s;
+    }
+    .mais-vendidos .produto img:hover {
+      transform: translateX(-50%) scale(1.08);
+      box-shadow: 0 8px 32px #00336633;
+    }
+    /* Portfólio moderno */
+    .portfolio-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 28px;
+      margin: 32px 0 18px 0;
+      padding: 0 10px;
+    }
+    .portfolio-thumb {
+      background: linear-gradient(120deg,#e6eef8 60%,#fff 100%);
+      border-radius: 16px;
+      box-shadow: 0 4px 24px #00336611;
+      padding: 18px 12px 14px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: box-shadow 0.2s, transform 0.2s;
+      cursor: pointer;
+      position: relative;
+    }
+    .portfolio-thumb:hover {
+      box-shadow: 0 8px 32px #00336622;
+      transform: scale(1.04) translateY(-4px);
+      z-index: 2;
+    }
+    .portfolio-thumb img {
+      width: 200px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px #00336611;
+      margin-bottom: 10px;
+      background: #f9f9f9;
+      transition: transform 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s;
+    }
+    .portfolio-thumb:hover img {
+      transform: scale(1.08) translateY(-2px);
+      box-shadow: 0 8px 32px #00336622;
+    }
+    .portfolio-caption {
+      font-size: 16px;
+      font-weight: 600;
+      color: #003366;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+    .badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: #25d366;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 8px;
+      padding: 4px 10px;
+      box-shadow: 0 2px 8px #25d36633;
+      letter-spacing: 0.5px;
+    }
+    .portfolio-thumb .portfolio-share {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .portfolio-share button {
+      background: #e6eef8;
+      color: #003366;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+      transition: background 0.2s, color 0.2s;
+    }
+    .portfolio-share button:hover {
+      background: #003366;
+      color: #fff;
+    }
+    /* Mais pedidos - slider horizontal profissional */
+    .mais-vendidos {
+      background: #fff;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .slider-container {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      overflow: hidden;
+      padding: 0 40px;
+    }
+    .produtos-slider {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(.4,0,.2,1);
+      will-change: transform;
+      justify-content: center;
+      align-items: stretch;
+      min-height: 180px;
+    }
+    .produto {
+      min-width: 260px;
+      max-width: 260px;
+      margin: 0 18px;
+      background: linear-gradient(to bottom, #f9f9f9, #eaeaea);
+      border-radius: 12px;
+      padding: 18px 18px 14px 18px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: box-shadow 0.2s;
+    }
+    .produto img {
+      width: 220px;
+      height: 110px;
+      border-radius: 10px;
+      object-fit: cover;
+      margin-bottom: 8px;
+      box-shadow: 0 2px 8px #00336611;
+      background: #f9f9f9;
+      display: block;
+      transition: transform 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s;
+    }
+    .produto img:hover {
+      transform: scale(1.08) translateY(-4px);
+      box-shadow: 0 8px 32px #00336622;
+      z-index: 2;
+    }
+    .produto h3 {
+      color: #003366;
+      font-size: 18px;
+      margin: 10px 0 5px;
+      font-weight: 700;
+    }
+    .produto p {
+      font-size: 14px;
+      color: #555;
+      margin: 4px 0;
+    }
+    .produto button {
+      background-color: #003366;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.2s;
+    }
+    .produto button:hover {
+      background: #0256a6;
+    }
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #003366cc;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      font-size: 22px;
+      cursor: pointer;
+      z-index: 2;
+      box-shadow: 0 2px 8px #00336622;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .slider-arrow.left { left: 8px; }
+    .slider-arrow.right { right: 8px; }
+    .slider-arrow:disabled {
+      opacity: 0.4;
+      cursor: default;
+    }
+    @media (max-width: 900px) {
+      .slider-container { max-width: 100%; padding: 0 10px; }
+      .produto { min-width: 160px; max-width: 160px; margin: 0 8px; }
+      .produtos-slider { min-height: 120px; }
+      .produto img { width: 140px; height: 70px; }
+    }
+    /* CTA fixo */
+    .cta-fixed {
+      position: fixed;
+      right: 24px;
+      bottom: 80px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 16px 28px;
+      font-size: 18px;
+      box-shadow: 0 8px 32px #0d6efd33;
+      z-index: 100;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .cta-fixed:hover {
+      background: var(--accent);
+      transform: scale(1.05);
+    }
+    /* Banner pop-up */
+    .popup-banner {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%);
+      background: #fff;
+      color: var(--primary);
+      border-radius: 14px;
+      box-shadow: 0 8px 32px #0d6efd22;
+      padding: 16px 32px;
+      font-size: 17px;
+      font-weight: 600;
+      z-index: 101;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      animation: fadeInBanner 0.7s;
+    }
+    @keyframes fadeInBanner {
+      from { opacity: 0; transform: translateX(-50%) translateY(30px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    .popup-banner button {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 16px;
+  </style>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Cadastro de visitante para marketing de conteúdo -->
+  <!-- Banner de recuperação de pedido abandonado -->
+  <div class="popup-banner" id="recoverBanner" style="display:none;">
+    Olá! Você esqueceu de finalizar seu pedido de bordado. Ainda está interessado?
+    <button onclick="retomarPedidoWizard()">Retomar pedido</button>
+    <button onclick="enviarLembreteWhatsapp()" style="background:#25d366;">WhatsApp + Cupom 5%</button>
+    <button onclick="document.getElementById('recoverBanner').style.display='none'" style="background:#e6eef8;color:var(--primary);">Fechar</button>
+  </div>
+  <!-- Banner pop-up de incentivo -->
+  <div class="popup-banner" id="popupBanner" style="display:none;">
+    Ganhe <span style="color:#0b7dda;font-weight:700;">5% de desconto</span> na primeira compra – peça pelo WhatsApp agora!
+    <button onclick="window.open('https://wa.me/258848520196','_blank')">Atendimento Já no WhatsApp</button>
+    <button onclick="document.getElementById('popupBanner').style.display='none'" style="background:#e6eef8;color:var(--primary);">Fechar</button>
+  </div>
+  <header>
+    <div class="brand" style="justify-content:flex-start">  
+      <img src="imagens/logo DB pronto.jpg" alt="Logo Bordados & Delivery" class="logo-img">
+      <div>
+        <div style="font-weight:700">Bordados & Delivery</div>
+        <div class="small">Seu toque único, seu bordado, entregue ao seu jeito</div>
+        <div class="small" style="color:var(--accent);margin-top:2px;font-weight:500;">Sustentabilidade · Produção local · Personalização</div>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#portfolio">Portfólio</a></li>
+        <li><a href="#encomenda">Encomende</a></li>
+        <li><a href="#dropship">Dropshipping</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a class="cta" href="#encomenda">Pedir Agora</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+  <!-- CTA fixo -->
+  <a href="#encomenda" class="cta-fixed">Faça Sua Encomenda</a>
+    <!-- HERO -->
+    <section class="hero">
+      <div style="position:relative;min-height:320px;display:flex;align-items:center;">
+        <img src="imagens/Banner profissional .png" alt="banner profissional" style="width:100%;height:320px;object-fit:cover;filter:brightness(0.55) blur(0.5px);border-radius:18px;box-shadow:0 6px 32px #0002;position:absolute;left:0;top:0;z-index:0;">
+        <div style="position:relative;z-index:1;padding:32px 36px;max-width:600px;color:#fff;text-shadow:0 2px 16px #0008;">
+        <h1>Bordados profissionais para marcas, lojas e eventos</h1>
+        <p>Encomende bordados em camisetas, bonés, uniformes e brindes. Integração com pagamentos M-PESA e e-Mola, confirmação por WhatsApp e serviço de dropshipping para lojistas.</p>
+        <div class="features">
+          <div class="chip">Entrega em Maputo</div>
+          <div class="chip">Upload de imagem</div>
+          <div class="chip">Dropshipping</div>
+        </div>
+
+        <div class="card" style="margin-top:18px;">
+          <h3>Por que escolher a gente?</h3>
+          <p class="small">Qualidade profissional, prazos claros, comunicação via WhatsApp e opção de envio direto ao cliente final (dropshipping).</p>
+          <div style="margin-top:12px;display:flex;gap:10px">
+            <a class="cta" href="#encomenda">Fazer Encomenda</a>
+            <a href="#portfolio" style="align-self:center">Ver Portfólio →</a>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <aside>
+            <div style="margin-top:8px;font-size:13px;color:var(--muted)">Aceitamos: M-PESA (instruções por WhatsApp) · e-Mola ·</div>
+          </form>
+      <!-- Formulário progressivo (wizard) para encomendas -->
+      <div class="card order-card" id="orderWizard" style="margin-bottom:28px;">
+        <form id="wizardForm">
+          <!-- Etapa 1: Produto -->
+          <div class="wizard-step" id="step1">
+            <h3 style="color:var(--primary);margin-bottom:8px;">1. Produto</h3>
+            <label for="wizardType">Tipo de peça <span class="small">(Ex: camiseta, toalha,  kit...)</span></label>
+            <select id="wizardType" name="wizardType" required>
+              <option value="">Selecione...</option>
+              <option value="camiseta">Camiseta</option>
+              <option value="toalha">Toalha</option>
+              <option value="kit">Kit</option>
+              <option value="boné">Boné</option>
+              <option value="outro">Outro</option>
+            </select>
+            <div class="small muted" style="margin-top:6px;">Escolha o tipo de peça. Imagens ilustrativas podem ser vistas no portfólio.</div>
+            <button type="button" class="cta" id="next1" style="margin-top:16px;">Próximo</button>
+          </div>
+          <!-- Etapa 2: Personalização -->
+          <div class="wizard-step" id="step2" style="display:none;">
+            <h3 style="color:var(--primary);margin-bottom:8px;">2. Personalização</h3>
+            <label for="wizardText">Nome/texto a bordar <span class="small">(Ex: Aladim, ALADIM, Aladim Magid...)</span></label>
+            <input id="wizardText" name="wizardText" required placeholder="Digite o nome exatamente como deseja" autocomplete="name">
+            <label for="wizardColor" style="margin-top:12px;">Cor do fio</label>
+            <select id="wizardColor" name="wizardColor" required autocomplete="off">
+              <option value="">Selecione...</option>
+              <option value="azul">Azul</option>
+              <option value="branco">Branco</option>
+              <option value="bege">Bege</option>
+              <option value="azul-turquesa">Azul-Turquesa</option>
+              <option value="azul-marinho">Azul-Marinho</option>
+              <option value="azul-escuro">Azul-Escuro</option>
+              <option value="vermelho">Vermelho</option>
+              <option value="dourado">Dourado</option>
+              <option value="preto">Preto</option>
+              <option value="verde">Verde</option>
+              <option value="verde-escuro">Verde-Escuro</option>
+              <option value="verde-alface">Verde-Alface</option>
+              <option value="amarelo">Amarelo</option>
+              <option value="castanho">Castanho</option>
+              <option value="laranja">Laranja</option>
+              <option value="lilás">Lilás</option>
+              <option value="cinza-escuro">Cinza-Escuro</option>
+              <option value="cinza-claro">Cinza-claro</option>
+              <option value="roxo">Roxo</option>
+              <option value="creme">Creme</option>
+              <option value="rosa-choque">Rosa-choque</option>
+              <option value="rosa-bebe">Rosa-bebe</option>
+              <option value="vinho">Vinho</option>
+              <option value="violeta">Violeta</option>
+            </select>
+            <label for="wizardRef" style="margin-top:12px;">Upload de referência (opcional)</label>
+            <input id="wizardRef" name="wizardRef" type="file" accept="image/*" aria-label="Upload de referência" tabindex="0">
+            <div id="wizardPreview" class="small muted" style="margin-top:6px">Nenhuma imagem carregada</div>
+            <button type="button" id="zoomImg" style="display:none;margin-top:8px;">🔍 Ampliar imagem</button>
+            <div class="small muted" style="margin-top:6px;">Exemplo: foto, logo, desenho. Paleta de cores disponível no portfólio.</div>
+            <button type="button" class="cta" id="prev2" style="margin-top:16px;background:#e6eef8;color:var(--primary);">Voltar</button>
+            <button type="button" class="cta" id="next2" style="margin-top:16px;">Próximo</button>
+          </div>
+          <!-- Etapa 3: Quantidade -->
+          <div class="wizard-step" id="step3" style="display:none;">
+            <h3 style="color:var(--primary);margin-bottom:8px;">3. Quantidade</h3>
+            <label for="wizardQty">Número de unidades</label>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <button type="button" id="minusQty" style="width:32px;height:32px;font-size:20px;">–</button>
+              <input id="wizardQty" name="wizardQty" type="number" min="1" value="1" required style="width:60px;text-align:center;">
+              <button type="button" id="plusQty" style="width:32px;height:32px;font-size:20px;">+</button>
+            </div>
+            <button type="button" class="cta" id="prev3" style="margin-top:16px;background:#e6eef8;color:var(--primary);">Voltar</button>
+            <button type="button" class="cta" id="next3" style="margin-top:16px;">Próximo</button>
+          </div>
+          <!-- Etapa 4: Dados do cliente -->
+          <div class="wizard-step" id="step4" style="display:none;">
+            <h3 style="color:var(--primary);margin-bottom:8px;">4. Dados do cliente</h3>
+            <label for="wizardName">Nome completo</label>
+            <input id="wizardName" name="wizardName" required placeholder="Seu nome completo">
+            <label for="wizardPhone" style="margin-top:12px;">WhatsApp</label>
+            <input id="wizardPhone" name="wizardPhone" required placeholder="84xxxxxxx" pattern="[0-9]{9}">
+            <label for="wizardEmail" style="margin-top:12px;">E-mail (opcional)</label>
+            <input id="wizardEmail" name="wizardEmail" type="email" placeholder="email@exemplo.com">
+            <label for="wizardAddress" style="margin-top:12px;">Endereço para entrega</label>
+            <input id="wizardAddress" name="wizardAddress" required placeholder="Rua, bairro, cidade">
+            <button type="button" class="cta" id="prev4" style="margin-top:16px;background:#e6eef8;color:var(--primary);">Voltar</button>
+            <button type="button" class="cta" id="next4" style="margin-top:16px;">Próximo</button>
+          </div>
+          <!-- Etapa 5: Pagamento -->
+          <div class="wizard-step" id="step5" style="display:none;">
+            <h3 style="color:var(--primary);margin-bottom:8px;">5. Pagamento</h3>
+            <label for="wizardPay">Opção de pagamento</label>
+            <select id="wizardPay" name="wizardPay" required>
+              <option value="">Selecione...</option>
+              <option value="mpesa">M-PESA</option>
+              <option value="emola">e-Mola</option>
+              <option value="transferencia">Transferência bancária</option>
+            </select>
+            <div class="small muted" style="margin-top:6px;">Após o envio, você receberá instruções detalhadas para pagamento.</div>
+            <button type="button" class="cta" id="prev5" style="margin-top:16px;background:#e6eef8;color:var(--primary);">Voltar</button>
+            <button type="button" class="cta" id="next5" style="margin-top:16px;">Próximo</button>
+          </div>
+          <!-- Etapa 6: Observações -->
+          <div class="wizard-step" id="step6" style="display:none;">
+            <h3 style="color:var(--primary);margin-bottom:8px;">6. Observações</h3>
+            <label for="wizardObs">Instruções adicionais</label>
+            <textarea id="wizardObs" name="wizardObs" rows="2" placeholder="Ex: cor da linha, posição do bordado..."></textarea>
+            <button type="button" class="cta" id="prev6" style="margin-top:16px;background:#e6eef8;color:var(--primary);">Voltar</button>
+            <button type="submit" class="cta" style="margin-top:16px;">Enviar pedido</button>
+          </div>
+        </form>
+      </div>
+      </aside>
+    </section>
+
+    <!-- SERVIÇOS -->
+    <section id="servicos">
+      <h2>Mais pedidos</h2>
+      <div class="slider-container">
+        <button class="slider-arrow left" id="arrowLeft" aria-label="Anterior">&#8592;</button>
+        <div class="produtos-slider" id="produtosSlider">
+          <div class="produto">
+            <img src="imagens/diliva bonés .png" alt="Boné Diliva">
+            <h3>Boné Personalizado</h3>
+            <p>Personalização bordada Logotipo</p>
+            <p>A partir de 250,00MT</p>
+            <button>Adicionar</button>
+          </div>
+          <div class="produto">
+            <img src="imagens/da bass boné .png" alt="Boné Da Bass">
+            <h3>Boné e Logotipo</h3>
+            <p>Ideal para brindes</p>
+            <p>A partir de 850,00MT</p>
+            <button>Adicionar</button>
+          </div>
+          <div class="produto">
+            <img src="imagens/twizza camisetas.png" alt="camiseta-twizza">
+            <h3>Camisa Casa Jensen</h3>
+            <p>Uniforme bordado</p>
+            <p>A partir de 280,00MT</p>
+            <button>Adicionar</button>
+          </div>
+          <div class="produto">
+            <img src="imagens/porto 3p .png" alt="Jogo de 3pcs Personalizada">
+            <h3>Jogo de 3pcs Personalizada</h3>
+            <p>Ideal para brindes</p>
+            <p>A partir de 2250,00MT</p>
+            <button>Adicionar</button>
+          </div>
+        </div>
+        <button class="slider-arrow right" id="arrowRight" aria-label="Próximo">&#8594;</button>
+      </div>
+      <!-- Feed Instagram integrado -->
+      <div style="margin-bottom:24px;text-align:center">
+        <h3 style="color:var(--primary);font-size:22px;margin-bottom:8px;">Clientes & Inspirações</h3>
+        <iframe src="https://www.instagram.com/p/Cw6QwQwJQwJ/embed" width="340" height="420" frameborder="0" scrolling="no" allowtransparency="true" style="border-radius:16px;box-shadow:0 4px 24px #0d6efd22;"></iframe>
+        <div class="small muted" style="margin-top:6px;">Veja mais em <a href="https://instagram.com/bordadosdelivery" target="_blank" style="color:var(--primary);font-weight:500">@bordadosdelivery</a></div>
+      </div>
+      <h2>Portfólio</h2>
+      <div class="portfolio-filters">
+        <button class="portfolio-filter-btn active" data-filter="all">Todos</button>
+        <button class="portfolio-filter-btn" data-filter="infantis">Infantis</button>
+        <button class="portfolio-filter-btn" data-filter="corporativos">Corporativos</button>
+        <button class="portfolio-filter-btn" data-filter="comemorativas">Datas comemorativas</button>
+        <button class="portfolio-filter-btn" data-filter="exclusivas">Peças exclusivas</button>
+      </div>
+      <div class="portfolio-gallery">
+        <div class="portfolio-thumb" data-category="corporativos" onclick="showPortfolioModalGallery([
+          'imagens/FB IMG.png',
+          'imagens/FB IMG_2.png',
+          'imagens/FB IMG_3.png'
+        ], 'Camiseta Twizza', 'Material: Algodão<br>Técnica: Bordado industrial<br>Tempo: 2 dias<br>Personalização: Logo e nome', 'mais pedidos', 'Essa camiseta bordada deixou nosso evento ainda mais especial! – Cliente João, Maputo')">
+          <span class="badge">Mais pedidos</span>
+          <img src="imagens/FB IMG.png" alt="Camiseta Twizza">
+          <div class="portfolio-caption">Camiseta Twizza</div>
+          <div class="portfolio-share">
+            <button onclick="event.stopPropagation();sharePortfolio('Camiseta Twizza')" title="Compartilhar no WhatsApp">WhatsApp</button>
+            <button onclick="event.stopPropagation();window.open('https://www.facebook.com/sharer/sharer.php?u='+location.href,'_blank')" title="Compartilhar no Facebook">Facebook</button>
+            <button onclick="event.stopPropagation();window.open('https://pinterest.com/pin/create/button/?url='+location.href,'_blank')" title="Compartilhar no Pinterest">Pinterest</button>
+          </div>
+        </div>
+        <div class="portfolio-thumb" data-category="corporativos" onclick="showPortfolioModal('https://images.unsplash.com/photo-1601758123927-9aa14b1a2f4a?auto=format&fit=crop&w=800&q=60', 'Camisa Casa Jensen', 'Material: Poliéster<br>Técnica: Bordado industrial<br>Tempo: 1 dia<br>Personalização: Logo bordado')">
+          <img src="https://images.unsplash.com/photo-1601758123927-9aa14b1a2f4a?auto=format&fit=crop&w=800&q=60" alt="Camisa Casa Jensen">
+          <div class="portfolio-caption">Camisa Casa Jensen</div>
+          <div class="portfolio-share">
+            <button onclick="event.stopPropagation();sharePortfolio('Camisa Casa Jensen')" title="Compartilhar no WhatsApp">WhatsApp</button>
+            <button onclick="event.stopPropagation();window.open('https://www.facebook.com/sharer/sharer.php?u='+location.href,'_blank')" title="Compartilhar no Facebook">Facebook</button>
+            <button onclick="event.stopPropagation();window.open('https://pinterest.com/pin/create/button/?url='+location.href,'_blank')" title="Compartilhar no Pinterest">Pinterest</button>
+          </div>
+        </div>
+        <div class="portfolio-thumb" data-category="comemorativas" onclick="showPortfolioModal('https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=60', 'Toalha Personalizada', 'Material: Algodão<br>Técnica: Bordado artesanal<br>Tempo: 3 horas<br>Personalização: Nome e desenho')">
+          <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=60" alt="Toalha Personalizada">
+          <div class="portfolio-caption">Toalha Personalizada</div>
+          <div class="portfolio-share">
+            <button onclick="event.stopPropagation();sharePortfolio('Toalha Personalizada')" title="Compartilhar no WhatsApp">WhatsApp</button>
+            <button onclick="event.stopPropagation();window.open('https://www.facebook.com/sharer/sharer.php?u='+location.href,'_blank')" title="Compartilhar no Facebook">Facebook</button>
+            <button onclick="event.stopPropagation();window.open('https://pinterest.com/pin/create/button/?url='+location.href,'_blank')" title="Compartilhar no Pinterest">Pinterest</button>
+          </div>
+        </div>
+        <!-- Adicione mais peças conforme desejar, alterando data-category e descrição -->
+      </div>
+      <div class="portfolio-modal" id="portfolioModal">
+        <div class="portfolio-modal-content" id="portfolioModalContent">
+          <!-- Conteúdo dinâmico -->
+        </div>
+      </div>
+    </section>
+
+    <!-- DROPSHIPPING -->
+    <section id="dropship" style="margin-top:22px">
+      <h2>Dropshipping para lojistas</h2>
+      <div class="card dropship">
+        <div style="flex:1">
+          <p class="small" style="font-size:16px;font-weight:500;color:var(--primary);margin-bottom:8px;">Você vende, nós produzimos, embalamos e entregamos direto ao seu cliente final. Sem necessidade de estoque próprio.</p>
+          <ul style="margin-bottom:10px;">
+            <li><strong>Cadastro do lojista:</strong> você se cadastra e recebe condições especiais.</li>
+            <li><strong>Recebimento do pedido:</strong> envie o pedido e arquivo do cliente por WhatsApp ou e-mail.</li>
+            <li><strong>Produção personalizada:</strong> bordamos conforme a demanda, com controle de qualidade.</li>
+            <li><strong>Envio ao cliente final:</strong> entregamos com etiqueta branca (marca do lojista se desejada).</li>
+            <li><strong>Suporte e rastreio:</strong> acompanhamento do pedido e atendimento dedicado.</li>
+          </ul>
+          <div class="card" style="background:#e6eef8;color:#0f172a;margin-bottom:10px;">
+            <h4 style="color:var(--primary);margin-bottom:6px;">Modelos de precificação</h4>
+            <ul class="small" style="margin:0 0 8px 18px;">
+              <li>Margem para o lojista: você define o preço final ao cliente.</li>
+              <li>Mínimos de pedido: a partir de 3 peças por modelo.</li>
+              <li>Prazos diferenciados para B2B: produção e entrega rápida para lojistas.</li>
+            </ul>
+            <div class="small" style="color:var(--accent);margin-bottom:4px;">Solicite tabela de preços e condições especiais para parceiros.</div>
+          </div>
+          <p class="small" style="margin-top:8px">Entre em contato para integrar sua loja e receber atendimento personalizado.</p>
+        </div>
+        <div style="width:320px">
+          <div class="card">
+            <h4>Etapas do serviço</h4>
+            <ol class="small muted">
+              <li><b>Cadastro do lojista</b></li>
+              <li><b>Recebimento do pedido</b></li>
+              <li><b>Produção do bordado personalizado</b></li>
+              <li><b>Envio ao cliente do lojista com etiqueta branca</b></li>
+              <li><b>Suporte e rastreio</b></li>
+            </ol>
+            <a href="#encomenda" class="cta">Quero ser parceiro</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section id="sobre" style="margin-top:22px">
+      <h2>Sobre nós</h2>
+      <div class="card" style="display:flex;gap:18px;align-items:center">
+        <div style="flex:1">
+          <p class="small">
+            <b>A Bordados & Delivery nasceu do desejo de transformar cada ideia em bordado, unindo tradição artesanal à inovação digital em Maputo. Nossa paixão pelo bordado começou com a vontade de eternizar momentos e criar presentes que realmente marcam.</b>
+          </p>
+          <p class="small">
+            <b>Somos uma equipe apaixonada por detalhes, criatividade e atendimento próximo. Nossa missão é produzir peças únicas, personalizadas sob medida, com rapidez e carinho — seja para empresas, eventos ou datas especiais.</b>
+          </p>
+          <p class="small">
+            <b>O diferencial está na produção artesanal, no cuidado com cada etapa e na comunicação direta com o cliente. Cada bordado é feito para ser especial, tornando sua experiência única do início ao fim.</b>
+          </p>
+        </div>
+        <div style="width:160px;text-align:center">
+          <div style="font-weight:700;font-size:20px">Rápido & Confiável</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INFORMAÇÕES / FOOTER -->
+    <footer>
+      <div class="footer-grid container">
+        <div>
+          <strong>Bordados & Delivery</strong>
+          <div class="small">Maputo · Moçambique</div>
+          <div class="small">Seu toque único, seu bordado, entregue ao seu jeito</div>
+          <div class="small" style="color:var(--accent);margin-top:2px;font: weight 400px;">Sustentabilidade · Produção local · Personalização</div>
+          <div class="small">WhatsApp: +258 848520196</div>
+          <div class="small">E-mail: <a href="mailto:bordadosdeliverydelivery@gmail.com" style="color:#fff;text-decoration:underline">bordadosdeliverydelivery@gmail.com</a></div>
+        </div>
+        <div>
+          <div><strong>Pagamentos</strong></div>
+          <div class="small">M-PESA · e-Mola · Transferência</div>
+        </div>
+        <div>
+          <div><strong>Redes sociais</strong></div>
+          <div class="small"><a href="https://wa.me/258848520196" target="_blank">WhatsApp</a> · <a href="#">Instagram</a></div>
+        </div>
+      </div>
+      <div class="container" style="margin-top:15px;text-align:center;font-size:13px;color:#b0b8c1">
+        &copy; 2025 Bordados & Delivery. Todos os direitos reservados.
+      </div>
+    </footer>
+
+    <!-- Botão flutuante WhatsApp -->
+    <a href="https://wa.me/258848520196" class="whatsapp-fab" target="_blank" title="Fale conosco no WhatsApp">WhatsApp</a>
+
+  </main>
+
+  <script src="js/script.js"></script>
+
+</body>
+</html>
